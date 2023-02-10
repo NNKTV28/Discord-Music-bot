@@ -10,7 +10,7 @@ First:
 
 Then, clone the repository:
 
-git clone https://github.com/NNKTV28/Discord-Music-bot.git
+'git clone https://github.com/NNKTV28/Discord-Music-bot.git'
 cd Discord-Music-bot
 pip install -r requirements.txt
 
