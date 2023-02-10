@@ -95,4 +95,4 @@ Code to leave alone:
 ```
         
 # For any questions, DM me in discord -> `NNKtv28#7344` 
-# Or join my discord server [Discord server](https://discord.gg/9fQymyuF4c)
+# Or join my discord server [Python Communists](https://discord.gg/9fQymyuF4c)
