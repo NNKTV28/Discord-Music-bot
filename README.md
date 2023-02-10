@@ -11,9 +11,9 @@ First:
 Then, clone the repository:
 
 git clone https://github.com/NNKTV28/Discord-Music-bot.git
-cd DisGPT_bot
+cd Discord-Music-bot
 pip install -r requirements.txt
 
 Or Download it here (Zip download button):
-https://github.com/NNKTV28/DisGPT_bot/archive/refs/heads/main.zip
+https://github.com/NNKTV28/Discord-Music-bot/archive/refs/heads/main.zip
 
