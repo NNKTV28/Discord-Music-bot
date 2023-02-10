@@ -1,0 +1,132 @@
+{
+Host : lavalink1.albinhakanson.se
+Port : 1141
+Password : albinhakanson.se
+Secure : false
+}
+{
+Host : lavalink.sneakynodes.com
+Port : 2333
+Password : sneakynodes.com
+Secure : false
+}
+{
+Host : nonssl.freelavalink.ga
+Port : 80
+Password : "www.freelavalink.ga"
+Secure : false
+}
+{
+Host : my.tofumc.pro
+Port : 25570
+Password : "sussy"
+Secure : false
+}
+{
+Host : lavalink4africa.islantay.tk
+Port : 8880
+Password : "AmeliaWatsonisTheBest**!"
+Secure : false
+}
+{
+Host : lava1.horizxon.studio
+Port : 80
+Password : "horizxon.studio"
+Secure : false
+}
+{
+Host : lava3.horizxon.studio
+Port : 80
+Password : "horizxon.studio"
+Secure : false
+}
+{
+Host : lava4.horizxon.studio
+Port : 80
+Password : "horizxon.studio"
+Secure : false
+}
+{
+Host : 147.139.135.8
+Port : 6969
+Password : "youshallnotpass"
+Secure : false
+}
+{
+Host : 178.128.104.235
+Port : 6969
+Password : "youshallnotpass"
+Secure : false
+}
+{
+Host : lavalink.api.timelessnesses.me
+Port : 80
+Password : youshallnotpass
+Secure : false
+}
+{
+Host : krn.2d.gay
+Port : 80
+Password : "AWP)JQ$Gv9}dm.u"
+Secure : false
+}
+{
+Host : minatoaqua.miraclecherrypie.cf
+Port : 2052
+Password : "KawaiiOnyanisbetter!!!!"
+Secure : false
+}
+{
+Host : lavalink.mune.moe
+Port : 8080
+Password : "yaemiko@mune"
+secure: false
+}
+{
+Host : node1.lewdhutao.tech
+Port : 1183
+Password : "lewdhutao"
+secure: false
+}
+{
+Host : purr.aikomechawaii.live
+Port : 10415 
+Password : "AnythingAsPassword"
+Secure : false
+}
+{
+Host : purr.aikomechawaii.live
+Port : 10357
+Password : "ImayBeStupid"
+Secure : false
+}
+{
+Host : lavalink.joshsevero.dev
+Port : 80
+Password : "oxygen"
+Secure : false
+}
+{
+Host : minatoaqua.miraclecherrypie.cf
+Port: 8080
+Password : "KawaiiOnyanisbetter!!!!"
+Secure : false
+}
+{
+Host : lavalink.clxud.lol
+Port: 2333
+Password : "youshallnotpass"
+Secure : false
+}
+{
+Host : lavalink.invalid-studios.com
+Port: 2333
+Password : "invaliduser"
+Secure : false
+}
+{
+Host : lavalink.cyber-host.eu
+Port: 2333
+Password : "discord.gg/cyberhost"
+Secure : false
+}
