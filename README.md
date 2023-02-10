@@ -26,7 +26,7 @@ This bot is made so you can run it without having to modify anything apart from 
 
 ### 1- Host lavalink in your pc (only when running bot in the same pc)
 
-- Run the lavalink.jar file in the lavalink folder, you can do this by doing: java jar lavalink.jar
+- Run the lavalink.jar file in the lavalink folder, you can do this by doing: `java jar lavalink.jar`
 - Go to `music.py` in the cogs folder and go down to line 88 - 90. You will see this:
 ```
 if not hasattr(bot, 'lavalink'):  # This ensures the client isn't overwritten during cog reloads.
