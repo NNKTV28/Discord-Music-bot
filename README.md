@@ -9,10 +9,11 @@ First:
 - On Windows, make sure to add python.exe to your PATH during the installation.
 
 Then, clone the repository:
-
-`git clone https://github.com/NNKTV28/Discord-Music-bot.git
+```
+git clone https://github.com/NNKTV28/Discord-Music-bot.git
 cd Discord-Music-bot
-pip install -r requirements.txt`
+pip install -r requirements.txt
+```
 
 Once installed, go to the folder and rename config.env to .env (i added the config because github didnt let me upload the .env file by itself)
 
