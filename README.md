@@ -26,7 +26,7 @@ This bot is made so you can run it without having to modify anything apart from 
 
 ### 1- Host lavalink in your pc (only when running bot in the same pc)
 
-# Setup the enviroent
+### Setup the enviroent
 
 **To make a lavalink server, you will need a java 13 or greater, I recommend using Azul Zulu java 16 or 17**
 You can download & setup java by going to here:
