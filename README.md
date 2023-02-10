@@ -113,5 +113,5 @@ Code to leave alone:
 ```
         
 # For any questions, DM me in discord -> `NNKtv28#7344` 
-# Or join my discord server [Python Communists](https://discord.gg/9fQymyuF4c)![Python Communists](https://user-images.githubusercontent.com/73384770/218076937-36afa15d-d603-4635-94ab-64f0e3a4dfb1.png)
+# Or join my discord server [Python Communists](https://discord.gg/9fQymyuF4c)
 
