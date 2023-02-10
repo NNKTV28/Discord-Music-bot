@@ -23,9 +23,12 @@ https://github.com/NNKTV28/Discord-Music-bot/archive/refs/heads/main.zip
 # Setup Lavalink
 This bot is made so you can run it without having to modify anything apart from your bot token in config.env. In case you want to modify it you have 3 options
 
-### Host lavalink in your pc (only when running bot in the same pc)
+### 1- Host lavalink in your pc (only when running bot in the same pc)
+
 - Run the lavalink.jar file in the lavalink folder, you can do this by doing: java jar lavalink.jar
-### Host lavalink in Replit
+
+### 2- Host lavalink in Replit
+
 -  Go to: repl.it/github/DarrenOfficial/lavalink-replit and press import from Github
 -  Run the replit
 -  copy the replit url and put it to your bot
