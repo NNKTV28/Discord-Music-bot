@@ -10,7 +10,7 @@ First:
 
 Then, clone the repository:
 
-git clone git@github.com:NNKTV28/DisGPT_bot.git
+git clone https://github.com/NNKTV28/Discord-Music-bot.git
 cd DisGPT_bot
 pip install -r requirements.txt
 
