@@ -26,7 +26,10 @@ This bot is made so you can run it without having to modify anything apart from 
 # Host lavalink in your pc (only when running bot in the same pc)
 - Run the lavalink.jar file in the lavalink folder, you can do this by doing: java jar lavalink.jar
 # Host lavalink in Replit
-- Go to: repl.it/github/DarrenOfficial/lavalink-replit and press import from Github
+-  Go to: repl.it/github/DarrenOfficial/lavalink-replit and press import from Github
 -  Run the replit
 -  copy the replit url and put it to your bot
 -  make sure you remove `https://` and always connect with the port 443
+
+**The default port to connect is `443` and the default password is `maybeiwasboring`
+You can’t change the lavalink port! it will default to 443 due to how replit work.**
