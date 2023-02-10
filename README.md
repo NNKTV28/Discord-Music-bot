@@ -8,7 +8,7 @@ https://git-scm.com/download/win
 * Make sure when you are installing python u add python.exe to path on the installation process.
 First:
 * Make sure to install git
-           * [Windows](https://git-scm.com/download/win) 
+           * [Windows](https://git-scm.com/download/win)
            * [Linux](https://git-scm.com/download/linux) 
            * [MacOS](https://git-scm.com/download/mac)
 * If you dont have python installed make sure to install it from [here](https://www.python.org/downloads)
