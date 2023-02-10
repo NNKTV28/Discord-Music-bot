@@ -31,6 +31,18 @@ This bot is made so you can run it without having to modify anything apart from 
 **To make a lavalink server, you will need a java 13 or greater, I recommend using Azul Zulu java 16 or 17**
 You can download & setup java by going to here:
 * [Linux](https://www.azul.com/downloads/?os=linux&package=jdk) Make sure to get `zulu16-jdk` or `zulu17-jdk`
+            * [Ubuntu / Debian; APT Base](https://docs.azul.com/core/zulu-openjdk/install/debian)
+            * [Rhel / CentOS / Oracle; RPM Base](https://docs.azul.com/core/zulu-openjdk/install/rpm-based-linux)
+            * [Arch](https://aur.archlinux.org/packages/zulu-16-bin/)
+* [MacOS](https://www.azul.com/downloads/?os=macos&package=jdk)
+* [Windows](https://www.azul.com/downloads/?os=windows&package=jdk)
+Once install you can verify it by doing `java -version`, the output should look something like this
+```
+openjdk version "16.0.2" 2021-07-20
+OpenJDK Runtime Environment Zulu16.32+15-CA (build 16.0.2+7)
+OpenJDK 64-Bit Server VM Zulu16.32+15-CA (build 16.0.2+7, mixed mode, sharing)
+```
+depending on your os, you may need to restart to for it to apply.
 
 * Run the lavalink.jar file in the lavalink folder, you can do this by doing: `java jar lavalink.jar`
 * Go to `music.py` in the cogs folder and go down to line 88 - 90. You will see this:
