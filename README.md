@@ -26,27 +26,33 @@ This bot is made so you can run it without having to modify anything apart from 
 
 ### 1- Host lavalink in your pc (only when running bot in the same pc)
 
-- Run the lavalink.jar file in the lavalink folder, you can do this by doing: `java jar lavalink.jar`
-- Go to `music.py` in the cogs folder and go down to line 88 - 90. You will see this:
+# Setup the enviroent
+
+**To make a lavalink server, you will need a java 13 or greater, I recommend using Azul Zulu java 16 or 17**
+You can download & setup java by going to here:
+* [Linux](https://www.azul.com/downloads/?os=linux&package=jdk) Make sure to get `zulu16-jdk` or `zulu17-jdk`
+
+* Run the lavalink.jar file in the lavalink folder, you can do this by doing: `java jar lavalink.jar`
+* Go to `music.py` in the cogs folder and go down to line 88 - 90. You will see this:
 ```
 if not hasattr(bot, 'lavalink'):  # This ensures the client isn't overwritten during cog reloads.
             bot.lavalink = lavalink.Client(bot.user.id)
             bot.lavalink.add_node('lavalink1.albinhakanson.se', 1141, 'albinhakanson.se', 'eu', 'default-node')  # Host, Port, Password, Region, Name
 ```
-- Apply these changes: 
+* Apply these changes: 
 
 ```
  if not hasattr(bot, 'lavalink'):  # This ensures the client isn't overwritten during cog reloads.
             bot.lavalink = lavalink.Client(bot.user.id)
             bot.lavalink.add_node('localhost', 2333, 'youshallnotpass', 'eu', 'default-node')  # Host, Port, Password, Region, Name
 ```
-- Run `Python bot.py`
+* Run `Python bot.py`
 ### 2- Host lavalink in Replit
 
--  Go to: `repl.it/github/DarrenOfficial/lavalink-replit` and press import from Github
--  Run the replit
--  copy the replit url and put it to your bot
--  make sure you remove `https://` and always connect with the port 443
+*  Go to: `repl.it/github/DarrenOfficial/lavalink-replit` and press import from Github
+*  Run the replit
+*  copy the replit url and put it to your bot
+*  make sure you remove `https://` and always connect with the port 443
 
 **The default port to connect is `443` and the default password is `maybeiwasboring`
 You can’t change the lavalink port! it will default to 443 due to how replit work.**
@@ -67,8 +73,8 @@ chmod +x start.sh
 ### 3- Using a public free node **(Recommended option)**
 For this method, i posted a file called `Lavalink free nodes.txt`, in there you have a bunch of nodes that are available to use for anyone, they work Way better than Replit and than self hosting, althoug if the module you are using shuts down, in that file you have many more ones that you can use
 
-- Go to the `music.py` file in the cogs folder
-- From line 22 to line 34 **DO NOT TOUCH THAT**, that code block ensures to check if theres any nodes running already, and if not, it will start a node
+* Go to the `music.py` file in the cogs folder
+* From line 22 to line 34 **DO NOT TOUCH THAT**, that code block ensures to check if theres any nodes running already, and if not, it will start a node
 Code to leave alone:
 ```
  # ensure a client already exists
