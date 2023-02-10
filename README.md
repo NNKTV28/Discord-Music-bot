@@ -1,12 +1,18 @@
+# Introduction
+This is a very basic discord bot that can play music, it uses lavalink nodes to search and play the music
+
 # Setup
-- Make sure to install git here:
+* Make sure to install git here:
 https://git-scm.com/download/win
-- If you dont have python installed make sure to install it here: https://www.python.org/downloads/
-- Make sure when you are installing python u add python.exe to path on the installation process.
+* If you dont have python installed make sure to install it here: https://www.python.org/downloads/
+* Make sure when you are installing python u add python.exe to path on the installation process.
 First:
-- Make sure to install git ([Windows](https://git-scm.com/download/win), [Linux](https://git-scm.com/download/linux), [macOS](https://git-scm.com/download/mac))
-- If you dont have python installed make sure to install it from [here](https://www.python.org/downloads)
-- On Windows, make sure to add python.exe to your PATH during the installation.
+* Make sure to install git
+           *[Windows](https://git-scm.com/download/win) 
+           *[Linux](https://git-scm.com/download/linux) 
+           *[MacOS](https://git-scm.com/download/mac)
+* If you dont have python installed make sure to install it from [here](https://www.python.org/downloads)
+* On Windows, make sure to add python.exe to your PATH during the installation.
 
 Then, clone the repository:
 ```
