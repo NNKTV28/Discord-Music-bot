@@ -118,4 +118,4 @@ Code to leave alone:
         
 # For any questions, DM me in discord -> `NNKtv28#7344` 
 # Or join my discord server [Python Communists](https://discord.gg/9fQymyuF4c)
-
+# Feel free to invite the bot to your server [Invite me](https://discord.com/api/oauth2/authorize?client_id=1064884678080868442&permissions=8&scope=bot)
