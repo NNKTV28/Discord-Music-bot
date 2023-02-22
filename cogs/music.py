@@ -1,5 +1,5 @@
+import itertools
 import re
-
 import discord
 import lavalink
 from discord.ext import commands
@@ -87,7 +87,7 @@ class Music(commands.Cog):
 
         if not hasattr(bot, 'lavalink'):  # This ensures the client isn't overwritten during cog reloads.
             bot.lavalink = lavalink.Client(bot.user.id)
-            bot.lavalink.add_node('lavalink1.albinhakanson.se', 1141, 'albinhakanson.se', 'eu', 'default-node')  # Host, Port, Password, Region, Name
+            bot.lavalink.add_node('lava1.horizxon.studio', 80, 'horizxon.studio', 'eu', 'default-node')  # Host, Port, Password, Region, Name
 
         lavalink.add_event_hook(self.track_hook)
 
@@ -159,8 +159,10 @@ class Music(commands.Cog):
             guild = self.bot.get_guild(guild_id)
             await guild.voice_client.disconnect(force=True)
 
-    @commands.command(aliases=['p'])
+    @commands.command(name="play",description="?p, ?P", aliases=['p', 'P'])
     async def play(self, ctx, *, query: str):
+        """ Play a song using song name or link"""
+        print(f'Playing {query} in {ctx.guild.id}')
         """ Searches and plays a song from a given query. """
         # Get the player for this guild from cache.
         player = self.bot.lavalink.player_manager.get(ctx.guild.id)
@@ -211,7 +213,7 @@ class Music(commands.Cog):
         if not player.is_playing:
             await player.play()
 
-    @commands.command(aliases=['lp'])
+    @commands.command(description="?lp, ?LP", aliases=['lp', 'LP'])
     async def lowpass(self, ctx, strength: float):
         """ Sets the strength of the low pass filter. """
         # Get the player for this guild from cache.
@@ -244,7 +246,7 @@ class Music(commands.Cog):
         embed.description = f'Set **Low Pass Filter** strength to {strength}.'
         await ctx.send(embed=embed)
 
-    @commands.command(aliases=['dc'])
+    @commands.command(description="?dc, ?DC", aliases=['dc', 'DC'])
     async def disconnect(self, ctx):
         """ Disconnects the player from the voice channel and clears its queue. """
         player = self.bot.lavalink.player_manager.get(ctx.guild.id)
@@ -266,7 +268,34 @@ class Music(commands.Cog):
         # Disconnect from the voice channel.
         await ctx.voice_client.disconnect(force=True)
         await ctx.send('*⃣ | Disconnected.')
+        
+    @commands.command(name='queue', description="?q, ?Q", aliases=['q', 'Q'])
+    async def queue_(self, ctx):
+        """See the list of songs that  will play next"""
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        if not player.queue:
+            return await ctx.send('There are no songs in the queue.')
+        upcoming = list(itertools.islice(player.queue, 0, 10))
+        queue_list = ''
+        for i, track in enumerate(upcoming):
+            queue_list += f'{i+1}) [{track.title}]({track.uri})\n'
+        embed = discord.Embed(
+            title=f'Upcoming Tracks - {len(player.queue)}',
+            description=queue_list,
+            color=discord.Color.dark_blue(),
+            timestamp=ctx.message.created_at
+        )
+        await ctx.send(embed=embed)
 
+    @commands.command(name = 'volume', description="?v, ?V", aliases=['v', 'V'])
+    async def volume(self, ctx, vol: int):
+        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
+        if not player.is_connected:
+            return await ctx.send("I'm not connected to a voice channel.")
+        if vol < 0 or vol > 100:
+            return await ctx.send("Volume must be between 0 and 100.")
+        await player.set_volume(vol)
+        await ctx.send(f"Volume set to {vol}%.")
 
 async def setup(bot):
     await bot.add_cog(Music(bot))
