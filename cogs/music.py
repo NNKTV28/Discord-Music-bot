@@ -1,12 +1,16 @@
-import itertools
 import re
 import discord
+import os
 import lavalink
 from discord.ext import commands
+from dotenv import load_dotenv
 from lavalink.filters import LowPass
 
 url_rx = re.compile(r'https?://(?:www\.)?.+')
 
+load_dotenv()
+#ignore this its just testing
+premium = os.getenv('premium_guilds')
 
 class LavalinkVoiceClient(discord.VoiceClient):
     """
@@ -119,7 +123,7 @@ class Music(commands.Cog):
         """ This check ensures that the bot and command author are in the same voicechannel. """
         player = self.bot.lavalink.player_manager.create(ctx.guild.id)
         # Create returns a player if one exists, otherwise creates.
-        # This line is important because it ensures that a player always exists for a guild.
+        # This line is important because it ensures that a player always exists for a guild. 
 
         # Most people might consider this a waste of resources for guilds that aren't playing, but this is
         # the easiest and simplest way of ensuring players are created.
@@ -161,9 +165,8 @@ class Music(commands.Cog):
 
     @commands.command(name="play",description="?p, ?P", aliases=['p', 'P'])
     async def play(self, ctx, *, query: str):
-        """ Play a song using song name or link"""
-        print(f'Playing {query} in {ctx.guild.id}')
-        """ Searches and plays a song from a given query. """
+        """This function handles track search and queueing."""
+        print(f'Playing {query} in {ctx.guild.name}, ID: {ctx.guild.id}')
         # Get the player for this guild from cache.
         player = self.bot.lavalink.player_manager.get(ctx.guild.id)
         # Remove leading and trailing <>. <> may be used to suppress embedding links in Discord.
@@ -181,7 +184,7 @@ class Music(commands.Cog):
         # Alternatively, results.tracks could be an empty array if the query yielded no tracks.
         if not results or not results.tracks:
             return await ctx.send('Nothing found!')
-
+       
         embed = discord.Embed(color=discord.Color.blurple())
 
         # Valid loadTypes are:
@@ -190,29 +193,57 @@ class Music(commands.Cog):
         #   SEARCH_RESULT   - query prefixed with either ytsearch: or scsearch:.
         #   NO_MATCHES      - query yielded no results
         #   LOAD_FAILED     - most likely, the video encountered an exception during loading.
+        
+        if results.load_type == 'TRACK_LOADED':
+            if 'list' in query and not ctx.guild.id == premium and len(results['tracks']) > 10:
+                return await ctx.send('The free version is limited to queuing up to 10 tracks from playlists. Upgrade to premium to queue more.')
+
+            track = results['tracks'][0]
+            player.add(requester=ctx.author.id, track=track)
+        
         if results.load_type == 'PLAYLIST_LOADED':
-            tracks = results.tracks
+            if not premium:
+                tracks = results.tracks[:10]  # Only select the first 10 tracks
 
-            for track in tracks:
-                # Add all of the tracks from the playlist to the queue.
-                player.add(requester=ctx.author.id, track=track)
+                for track in tracks:
+                    if tracks < 10:
+                        # Add the selected tracks from the playlist to the queue.
+                        player.add(requester=ctx.author.id, track=track)
+                        embed.title = 'Playlist too big!'
+                        embed.description = f'{results.playlist_info.name} - {len(tracks)} tracks (only 10 tracks are enqueued because you are not a premium user)'
 
-            embed.title = 'Playlist Enqueued!'
-            embed.description = f'{results.playlist_info.name} - {len(tracks)} tracks'
+                embed.title = 'Playlist Enqueued!'
+                embed.description = f'{results.playlist_info.name} - {len(tracks)} tracks (only 10 tracks enqueued because you are not a premium user)'
+
+            else:
+                tracks = results.tracks
+                
+                for track in tracks:
+                    # Add all of the tracks from the playlist to the queue.
+                    player.add(requester=ctx.author.id, track=track)
+
+                embed.title = 'Playlist Enqueued!'
+                embed.description = f'▶️ {results.playlist_info.name} - {len(tracks)} tracks'
+
         else:
             track = results.tracks[0]
             embed.title = 'Track Enqueued'
-            embed.description = f'[{track.title}]({track.uri})'
+            embed.description = f'▶️ [{track.title}]({track.uri})'
 
             player.add(requester=ctx.author.id, track=track)
 
+        embed.set_author(
+            name=self.bot.user.name,
+            icon_url=self.bot.user.display_avatar.url
+        )
         await ctx.send(embed=embed)
+
 
         # We don't want to call .play() if the player is playing as that will effectively skip
         # the current track.
         if not player.is_playing:
             await player.play()
-
+            
     @commands.command(description="?lp, ?LP", aliases=['lp', 'LP'])
     async def lowpass(self, ctx, strength: float):
         """ Sets the strength of the low pass filter. """
@@ -235,67 +266,18 @@ class Music(commands.Cog):
             embed.description = 'Disabled **Low Pass Filter**'
             return await ctx.send(embed=embed)
 
-        # Lets create our filter.
-        low_pass = LowPass()
-        low_pass.update(smoothing=strength)  # Set the filter strength to the user's desired level.
+        # Set the filter strength to the user's desired level.
+        self.low_pass.update(smoothing=strength)
 
         # This applies our filter. If the filter is already enabled on the player, then this will
         # just overwrite the filter with the new values.
-        await player.set_filter(low_pass)
+        await player.set_filter(self.low_pass)
 
         embed.description = f'Set **Low Pass Filter** strength to {strength}.'
-        await ctx.send(embed=embed)
-
-    @commands.command(description="?dc, ?DC", aliases=['dc', 'DC'])
-    async def disconnect(self, ctx):
-        """ Disconnects the player from the voice channel and clears its queue. """
-        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
-
-        if not ctx.voice_client:
-            # We can't disconnect, if we're not connected.
-            return await ctx.send('Not connected.')
-
-        if not ctx.author.voice or (player.is_connected and ctx.author.voice.channel.id != int(player.channel_id)):
-            # Abuse prevention. Users not in voice channels, or not in the same voice channel as the bot
-            # may not disconnect the bot.
-            return await ctx.send('You\'re not in my voicechannel!')
-
-        # Clear the queue to ensure old tracks don't start playing
-        # when someone else queues something.
-        player.queue.clear()
-        # Stop the current track so Lavalink consumes less resources.
-        await player.stop()
-        # Disconnect from the voice channel.
-        await ctx.voice_client.disconnect(force=True)
-        await ctx.send('*⃣ | Disconnected.')
-        
-    @commands.command(name='queue', description="?q, ?Q", aliases=['q', 'Q'])
-    async def queue_(self, ctx):
-        """See the list of songs that  will play next"""
-        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
-        if not player.queue:
-            return await ctx.send('There are no songs in the queue.')
-        upcoming = list(itertools.islice(player.queue, 0, 10))
-        queue_list = ''
-        for i, track in enumerate(upcoming):
-            queue_list += f'{i+1}) [{track.title}]({track.uri})\n'
-        embed = discord.Embed(
-            title=f'Upcoming Tracks - {len(player.queue)}',
-            description=queue_list,
-            color=discord.Color.dark_blue(),
-            timestamp=ctx.message.created_at
+        embed.set_author(
+            name=self.bot.user.name,
+            icon_url=self.bot.user.display_avatar.url
         )
         await ctx.send(embed=embed)
-
-    @commands.command(name = 'volume', description="?v, ?V", aliases=['v', 'V'])
-    async def volume(self, ctx, vol: int):
-        player = self.bot.lavalink.player_manager.get(ctx.guild.id)
-        if not player.is_connected:
-            return await ctx.send("I'm not connected to a voice channel.")
-        if vol < 0 or vol > 100:
-            return await ctx.send("Volume must be between 0 and 100.")
-        await player.set_volume(vol)
-        await ctx.send(f"Volume set to {vol}%.")
-
 async def setup(bot):
     await bot.add_cog(Music(bot))
