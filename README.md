@@ -86,7 +86,7 @@ chmod +x start.sh
 ./start.sh
 ```
 
-### 3- Using a public free node **(Recommended option)**
+### 3- Using a public free node **(i do not recommended this option becaues of issues that you cant control)**
 For this method, i posted a file called `Lavalink free nodes.txt`, in there you have a bunch of nodes that are available to use for anyone, they work Way better than Replit and than self hosting, althoug if the module you are using shuts down, in that file you have many more ones that you can use
 
 * Go to the `music.py` file in the cogs folder
